@@ -1,5 +1,5 @@
 
-# _remarksEnks_
+# _TIKKU_
 
 A simple ticket remarks writer for lazy people to automate the boring ticket writing process.... with help by [Shrijana](https://github.com/ShrijanaKhatiwada)
 
