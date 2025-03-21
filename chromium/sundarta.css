@@ -1,21 +1,47 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Tangerine:wght@400;700&display=swap');
 
+/* Light Mode (Default) */
+:root {
+    --background-color: #ececec;
+    --text-color: #000000;
+    --button-background: #ececec;
+    --button-border: #ececec;
+    --button-shadow: -10px -10px 15px rgba(255,255,255,0.5), 10px 10px 15px rgba(70,70,70,0.12);
+    --input-shadow: inset -10px -10px 15px rgba(255,255,255,0.5), inset 10px 10px 15px rgba(70,70,70,0.12);
+    --scrollbar-track: #adadad;
+    --scrollbar-thumb: #e6e6e6;
+    --scrollbar-thumb-border: rgb(155, 155, 155);
+}
+
+/* Dark Mode */
+.dark-mode {
+    --background-color: #222222;
+    --text-color: #ffffff;
+    --button-background: #333333;
+    --button-border: #444444;
+    --button-shadow: -10px -10px 15px rgba(40,40,40,0.5), 10px 10px 15px rgba(0,0,0,0.4);
+    --input-shadow: inset -10px -10px 15px rgba(40,40,40,0.5), inset 10px 10px 15px rgba(0,0,0,0.4);
+    --scrollbar-track: #444444;
+    --scrollbar-thumb: #666666;
+    --scrollbar-thumb-border: #777777;
+}
+
 ::-webkit-scrollbar {
     height: 10px;
     margin-bottom: 10px;
-  }
+}
 ::-webkit-scrollbar-track {
-    background: #adadad;
+    background: var(--scrollbar-track);
     margin-left: 18rem;
     margin-right: 18rem;
     border-radius: 100vw;
-  }
+}
 ::-webkit-scrollbar-thumb {
     cursor: pointer;
-    background: #e6e6e6;
-    border: 2px solid rgb(155, 155, 155);
+    background: var(--scrollbar-thumb);
+    border: 2px solid var(--scrollbar-thumb-border);
     border-radius: 100vw;
-  }
+}
 
 html{
     height:32rem;
@@ -26,12 +52,14 @@ html{
     display: flex ;
 }
 body{
-    background-color: #ececec;
+    background-color: var(--background-color);
+    color: var(--text-color);
     padding:20;
     margin:20;
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
+    transition: all 0.3s ease;
 }
 .intro{
     height:4rem;
@@ -63,32 +91,49 @@ img{
 }
 a{
     text-decoration: none;
-    color:black;
+    color: var(--text-color);
 }
 button{
     height:4rem;
     width:12rem;
-    background-color: #ececec;
-    box-shadow: -10px -10px 15px rgba(255,255,255,0.5), 10px 10px 15px rgba(70,70,70,0.12);
-    border: 8px solid #ececec;
-    border-radius: 200px ;
+    background-color: var(--button-background);
+    box-shadow: var(--button-shadow);
+    border: 8px solid var(--button-border);
+    border-radius: 200px;
     outline: none;
     margin: 0.5rem 0.5rem 0.5rem 1.5rem;
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 button:active{
-    box-shadow: -10px -10px 15px rgba(255,255,255,0.5), 10px 10px 15px rgba(70,70,70,0.12), inset  -10px -10px 15px rgba(255,255,255,0.5), inset 10px 10px 15px rgba(70,70,70,0.12);;
+    box-shadow: var(--button-shadow), inset var(--button-shadow);
 }
 input{
     height:3.5rem;
     width:15rem;
-    background-color: #ececec;
-    box-shadow: inset -10px -10px 15px rgba(255,255,255,0.5), inset 10px 10px 15px rgba(70,70,70,0.12);
+    background-color: var(--background-color);
+    box-shadow: var(--input-shadow);
     border:none;
-    border-bottom: 8px solid #ececec;
+    border-bottom: 8px solid var(--button-border);
     outline: none;
     font-size: 24px;
+    color: var(--text-color);
+    transition: all 0.3s ease;
 }
 #measures{
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
+}
+
+/* Dark Mode Toggle Button */
+.theme-toggle {
+    display: flex;
+    justify-content: center;
+}
+
+#darkModeToggle {
+    height: 2.5rem;
+    width: auto;
+    padding: 0 1rem;
+    cursor: pointer;
 }

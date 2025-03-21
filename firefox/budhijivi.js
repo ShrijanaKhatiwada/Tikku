@@ -1,3 +1,31 @@
+// Add to the very top of Firefox budhijivi.js
+// Dark mode toggle functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    
+    // Check if user has previously set a preference
+    browser.storage.sync.get('darkMode').then(function(data) {
+        if (data.darkMode) {
+            document.body.classList.add('dark-mode');
+            darkModeToggle.textContent = '☀️ Light Mode';
+        }
+    });
+    
+    // Toggle dark mode when button is clicked
+    darkModeToggle.addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+        
+        // Update button text
+        if (document.body.classList.contains('dark-mode')) {
+            darkModeToggle.textContent = '☀️ Light Mode';
+            browser.storage.sync.set({ 'darkMode': true });
+        } else {
+            darkModeToggle.textContent = '🌙 Dark Mode';
+            browser.storage.sync.set({ 'darkMode': false });
+        }
+    });
+});
+
 const callerNumber = document.getElementById("contact"); 
 const measuresTaken= document.getElementById("measures"); 
 const theCause = document.getElementById("causes"); 

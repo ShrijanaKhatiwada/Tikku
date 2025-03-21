@@ -8,8 +8,10 @@
     },
     "permissions":[
         "activeTab",
-        "scripting"
-],
+        "scripting",
+        "webNavigation",
+        "storage"
+    ],
     "icons": {
            "512" : "/images/logo-512.png",
            "256" : "/images/logo-256.png",
