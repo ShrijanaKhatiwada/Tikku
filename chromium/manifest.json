@@ -1,8 +1,8 @@
 {
     "manifest_version":  3,
-    "name": "Enku",
+    "name": "Tikku",
     "version": "0.1",
-   "description":"Automate the process of writing remarks",
+   "description":"Shrijana's solution to the remarks writing problem",
     "background":{
         "service_worker":"background.js"
     },
@@ -19,7 +19,7 @@
            "16" : "/images/logo-16.png"
     },
     "action":{
-        "default_title": "Enku, the remarks writer",
+        "default_title": "Tikku, the remarks writer - Made by Shrijana",
         "default_popup": "popup.html"
     }
     }
