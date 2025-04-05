@@ -217,6 +217,7 @@ queriesSales.addEventListener('click', async () => {
 const remind = document.querySelector('.ReminderCall');
 remind.addEventListener('click', async () => {
     const contactNo = callerNumber.value;
+    const causes = theCause.value;
     let [tab] = await chrome.tabs.query(
         {
             active: true,
@@ -227,7 +228,7 @@ remind.addEventListener('click', async () => {
         {
             target: { tabId: tab.id },
             function: ReminderCall,
-            args: [contactNo],
+            args: [contactNo,causes],
         }
     )
 });
@@ -564,12 +565,12 @@ function solvedClearTV(caller,measure,cause) {
 function noInternetSolved(caller,measure) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br>As per conversation on " +caller+ ", the client had lost connection. According to the client, "+measure+" has restored the connection.<br>Thank You!!!<br>The following data can be used for reference:<br>"
+        "Dear Team,<br>As per conversation on " +caller+ ", the client had lost connection. According to the client, "+measure+" has restored the connection.<br>Thank You!!!<br>The following data can be used for reference:<br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine"
 }
 function noInternetUnsolved(caller,cause) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br>As per conversation on " +caller+ ", the client has lost connection. On further verification, " +cause+ " seems to be the root cause of the issue. Please perform the necessities asap.<br>Thank You!!!<br>The following data can be used for reference:<br>"
+        "Dear Team,<br>As per conversation on " +caller+ ", the client has lost connection. On further verification, " +cause+ " seems to be the root cause of the issue. Please perform the necessities asap.<br>Thank You!!!<br>The following data can be used for reference:<br><br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine"
 }
 function wireManagement(caller) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
@@ -594,17 +595,17 @@ function slowInternetOVCC(caller) {
 function slowInternetSolved(caller,measure) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br>As per conversation on "+caller+", the client had sluggish connection. According to the client, "+measure+" has solved the issue. <br>Thank You!!!<br>The following data can be used for reference:<br>"
+        "Dear Team,<br>As per conversation on "+caller+", the client had sluggish connection. According to the client, "+measure+" has solved the issue. <br>Thank You!!!<br>The following data can be used for reference:<br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine"
 }
 function slowInternetUnsolved(caller,measure) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br> As per conversation on "+caller+", the client has sluggish connection. Unfortunately," +measure+ "did not seem to have solved the issue according to the client. Please proceed accordingly.<br>Thank You!!!<br> The following data can be used for reference:<br> "
+        "Dear Team,<br> As per conversation on "+caller+", the client has sluggish connection. Unfortunately," +measure+ "did not seem to have solved the issue according to the client. Please proceed accordingly.<br>Thank You!!!<br> The following data can be used for reference: <br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine"
 }
 function fieldSupportRequired(caller,measure,cause) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br> As per conversation on "+caller+", the client has "+ cause +" issues. Unfortunately, " +measure+ " did not seem to have solved the issue and the client has requested for field support. Please provide the necessary support to the client asap.<br>Thank You!!!"
+        "Dear Team,<br> As per conversation on "+caller+", the client has "+ cause +" issues. Unfortunately, " +measure+ " did not seem to have solved the issue and the client has requested for field support. Please provide the necessary support to the client asap.<br>Thank You!!!<br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine"
 }
 function accountExtend(caller) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
@@ -644,7 +645,7 @@ function startAccount(caller) {
 function followUp(caller,measures,cause) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br>As per conversation on "+caller+", the client had " +cause+ " which had been restored successfully by "+measures+", but the client is pessimistic about his connection remaining stable and thus, has requested for a follow-up call at around <strong><i>$TIME</strong></i>. Please provide the client with requested follow-up and required help.<br>Thank you!!<br>The following data can be used for reference:"
+        "Dear Team,<br>As per conversation on "+caller+", the client had " +cause+ " which had been restored successfully by "+measures+", but the client is pessimistic about his connection remaining stable and thus, has requested for a follow-up call at around <strong><i>$TIME</strong></i>. Please provide the client with requested follow-up and required help.<br>Thank you!!<br>The following data can be used for reference:<br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine"
 }
 function assistanceRequired(caller,cause) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
@@ -656,13 +657,13 @@ function connectionShift(caller,measure,cause) {
     textArea.innerHTML =
         "Dear Team,<br>As per conversation on "+caller+", the client wants to shift their connection<br> From: "+measure+" <br>To: "+cause+" <br> thus, please proceed accordingly asap.<br>Thank You!!!"
 }
-function ReminderCall(caller) {
+function ReminderCall(caller,cause) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-    "Dear Team,<br>**********REMINDER CALL RECEIVED************<br>As per conversation on "+caller+", the client's lost connection has not yet been restored. Please perform the necessities asap for the client is pretty infuriated.<br>Also, the client wants to get updates about the situation and the estimated restoration time of his connection thus, please proceed accordingly.<br>Thank You!!!<br>The following data can be used for reference:<br>"
+    "Dear Team,<br>**********REMINDER CALL RECEIVED************<br>As per conversation on "+caller+", the client's "+cause+" connection has not yet been fixed. Please perform the necessities asap for the client is extremely infuriated.<br>Also, the client wants to get updates about the situation along with the estimated restoration time of his connection thus, please proceed accordingly.<br>Thank You!!!<br>"
 }
 function passwordChange(caller) {
     const textArea = document.querySelector('.ajax__html_editor_extender_texteditor');
     textArea.innerHTML =
-        "Dear Team,<br>As per conversation on "+caller+", the client wanted to change his WiFi password. The password has been changed successfully. <br>Thank You!!"
+        "Dear Team,<br>As per conversation on "+caller+", the client wanted to change his WiFi password. The password has been changed successfully. <br>Thank You!!<br>The following data can be used for reference:<br>Current Device Status:- Internet Not Working<br>Current Channel Changed to: <br>Connected Clients:  <br>Optical Power: <br>Rebooted: no<br>Session: Fine <br>Password: "
 }
